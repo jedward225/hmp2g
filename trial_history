@@ -1,0 +1,372 @@
+PS D:\hmp2g> docker pull fuqingxu/hmp:latest
+Error response from daemon: failed to resolve reference "docker.io/fuqingxu/hmp:latest": failed to do request: Head "https://registry-1.docker.io/v2/fuqingxu/hmp/manifests/latest": dialing registry-1.docker.io:443 container via direct connection because  has no HTTPS proxy: connecting to registry-1.docker.io:443: dial tcp [2a03:2880:f10e:83:face:b00c:0:25de]:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+PS D:\hmp2g> docker pull fuqingxu/hmp:latest
+ established connection failed because connected host has failed to respond.
+PS D:\hmp2g> docker pull fuqingxu/hmp:latest
+Error response from daemon: failed to resolve reference "docker.io/fuqingxu/hmp:latest": failed to do request: Head "https://registry-1.docker.io/v2/fuqingxu/hmp/manifests/latest": dialing registry-1.docker.io:443 container via direct connection because  has no HTTPS proxy: connecting to registry-1.docker.io:443: dial tcp [2a03:2880:f10e:83:face:b00c:0:25de]:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+PS D:\hmp2g> [System.Environment]::SetEnvironmentVariable("https_proxy", "http://127.0.0.1:7890
+>> ", "User")
+PS D:\hmp2g> [System.Environment]::SetEnvironmentVariable("http_proxy", "http://127.0.0.1:7890
+>> ", "User")
+PS D:\hmp2g> docker pull fuqingxu/hmp:latest
+latest: Pulling from fuqingxu/hmp
+e91560431b3a: Pulling fs layer
+26ca1df54f63: Pulling fs layer
+481badb6c06b: Pulling fs layer
+Digest: sha256:65a9562a3d96a3650a141629fc448b451a82c8be747d2dc8a6a76714ffbaf420
+Status: Downloaded newer image for fuqingxu/hmp:latest
+docker.io/fuqingxu/hmp:latest
+PS D:\hmp2g> docker run -itd --name hmp-mytest --net host --gpus all --shm-size=16G fuqingxu/hmp:latest
+b7bfe64c4243c7944b51ac3663876591e816458dd7d8eb98cdea79c22ca06dcd
+PS D:\hmp2g> docker exec -it hmp-mytest /bin/bash 
+root@docker-desktop:/# su hmp
+hmp@docker-desktop:/$ cd ~
+hmp@docker-desktop:~$ ls
+Desktop    GpuLock   Pictures  StarCraftIII      hmp2g              zootopia.jpg
+Documents  HmapTemp  Public    UnrealHmapBinary  thinclient_drives
+hmp@docker-desktop:~$ request returned 500 Internal Server Error for API route and version http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.48/exec/c858dc86e0344b3769d959bce86e003135cee92c4b7f734fcefd9ec9a2eb7190/json, check if the server supports the requested API version
+PS D:\hmp2g> 
+ *  History restored 
+
+. : 无法加载文件 C:\Users\22597\Documents\WindowsPowerShell\profile.ps1，因为在此系统上禁止运行脚本。有关详细信息，请参
+阅 https:/go.microsoft.com/fwlink/?LinkID=135170 中的 about_Execution_Policies。
+所在位置 行:1 字符: 3
++ . 'C:\Users\22597\Documents\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : SecurityError: (:) []，PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+PS D:\hmp2g> docker exec -it hmp-mytest /bin/bash 
+error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.48/containers/hmp-mytest/json": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+PS D:\hmp2g> docker run -itd --name hmp-mytest --net host --gpus all --shm-size=16G fuqingxu/hmp:latest
+docker: error during connect: Head "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/_ping": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+Run 'docker run --help' for more information
+PS D:\hmp2g> docker exec -it hmp-mytest /bin/bash
+Error response from daemon: container b7bfe64c4243c7944b51ac3663876591e816458dd7d8eb98cdea79c22ca06dcd is not running
+PS D:\hmp2g> docker start hmp-mytest 
+hmp-mytest
+PS D:\hmp2g>  docker rm hmp-mytest
+Error response from daemon: cannot remove container "/hmp-mytest": container is running: stop the container before removing or force remove
+PS D:\hmp2g> docker exec -it hmp-mytest /bin/bash
+root@docker-desktop:/#    su hmp
+hmp@docker-desktop:/$ cd ~
+hmp@docker-desktop:~$ python main.py -c RESULT/uhmap_hete10vs10/render_result.jsonc
+python3: can't open file 'main.py': [Errno 2] No such file or directory
+hmp@docker-desktop:~$ ls
+Desktop    GpuLock   Pictures  StarCraftIII      hmp2g              zootopia.jpg
+Documents  HmapTemp  Public    UnrealHmapBinary  thinclient_drives
+hmp@docker-desktop:~$ python main.py -c RESULT/uhmap_hete10vs10/render_result.jsonc
+python3: can't open file 'main.py': [Errno 2] No such file or directory
+hmp@docker-desktop:~$     cd hmp2g
+hmp@docker-desktop:~/hmp2g$     python main.py -c RESULT/uhmap_hete10vs10/render_result.jsonc
+ reading configuration at RESULT/uhmap_hete10vs10/render_result.jsonc 
+Traceback (most recent call last):
+  File "main.py", line 65, in <module>
+    cfg = prepare_args()
+  File "/home/hmp/hmp2g/UTIL/config_args.py", line 46, in prepare_args
+    with open(args.cfg, encoding='utf8') as f: json_data = json.load(f)
+FileNotFoundError: [Errno 2] No such file or directory: 'RESULT/uhmap_hete10vs10/render_result.jsonc'
+hmp@docker-desktop:~/hmp2g$ ls
+ALGORITHM  README.md   UTIL       ZHECKPOINT   cradle.ipynb  multi_server.py         task_runner.py
+LICENSE    TEMP        VISUALIZE  __pycache__  cradle.py     multi_team.py
+MISSION    THIRDPARTY  ZDOCS      config.py    main.py       multi_team_parallel.py
+hmp@docker-desktop:~/hmp2g$ python main.py -c DOCS/examples/dca/example_dca.jsonc
+ reading configuration at DOCS/examples/dca/example_dca.jsonc 
+Traceback (most recent call last):
+  File "main.py", line 65, in <module>
+    cfg = prepare_args()
+  File "/home/hmp/hmp2g/UTIL/config_args.py", line 46, in prepare_args
+    with open(args.cfg, encoding='utf8') as f: json_data = json.load(f)
+FileNotFoundError: [Errno 2] No such file or directory: 'DOCS/examples/dca/example_dca.jsonc'
+hmp@docker-desktop:~/hmp2g$ less README.md
+hmp@docker-desktop:~/hmp2g$ python main.py -c ZHECKPOINT/uhmap_hete10vs10/render_result.jsonc
+ reading configuration at ZHECKPOINT/uhmap_hete10vs10/render_result.jsonc 
+ ------------- config.py->GlobalConfig ------------- 
+ [config] override note: more_testing --> uhmap_hete10vs10 
+ [config] override env_name: sr_tasks->cargo --> uhmap 
+ [config] override env_path: MISSION.sr_tasks.multiagent.cargo --> MISSION.uhmap 
+ [config] override draw_mode: OFF --> Img 
+ [config] override num_threads: 64 --> 1 
+ [config] override report_reward_interval: 64 --> 4 
+ [config] override test_interval: 2048 --> 1280 
+ [config] override test_epoch: 64 --> 128 
+ [config] override interested_team: 0 --> 0 
+ [config] override seed: 37494 --> 2721 
+ [config] override device: cuda --> cpu
+ [config] override max_n_episode: 200000 --> 5000000
+ [config] override fold: 1 --> 1
+ [config] override backup_files: [] --> ['ALGORITHM/hete_league_onenet_fix', 'MISSION/uhmap']
+ [config] override gpu_fraction: 1.0 --> 0.5
+ [config] override gpu_party: off --> cuda2_party1
+ [config] override test_only: False --> True
+ [config] warning, logdir is chained by ['note'], automatic modifying: ./ZHECKPOINT/more_testing/ --> ./ZHECKPOINT/uhmap_hete10vs10/
+ ---------------------------------------------------
+       align_episode       --> True
+          env_name         --> uhmap
+          env_path         --> MISSION.uhmap
+         draw_mode         --> Img
+      activate_logger      --> True
+        data_logger        --> auto load, do not change this var!
+         resume_mod        --> False
+        mt_act_order       --> old_method
+        mt_parallel        --> False
+            seed           --> 2721
+            note           --> uhmap_hete10vs10
+           logdir          --> ./ZHECKPOINT/uhmap_hete10vs10/
+  recall_previous_session  --> False
+         test_only         --> True
+        test_logger        --> test_only_profile.txt
+           device          --> cpu
+         gpu_party         --> cuda2_party1
+       manual_gpu_ctl      --> False
+        gpu_fraction       --> 0.5
+        num_threads        --> 1
+            fold           --> 1
+      n_parallel_frame     --> 5000000
+       max_n_episode       --> 5000000
+        use_float64        --> False
+      interested_team      --> 0
+    interested_agent_num   --> 50
+    interested_agent_uid   --> range(0, 50)
+   report_reward_interval  --> 4
+     train_time_testing    --> True
+       test_interval       --> 1280
+         test_epoch        --> 128
+       ScenarioConfig      --> This ScenarioConfig var will be automatically linked to task configuration later in ./MISSION/env_router.py
+        backup_files       --> ['ALGORITHM/hete_league_onenet_fix', 'MISSION/uhmap']
+        hmap_logger        --> None
+        heartbeat_on       --> True
+         cfg_ready         --> False
+      allow_res_upload     --> True
+     upload_after_test     --> False
+        machine_info       --> auto load, do not change this var!
+     remote_server_ops     -->
+ ---------------------------------------------------
+
+
+
+ ------------- MISSION.uhmap.uhmap_env_wrapper.py->ScenarioConfig -------------
+ [config] override N_AGENT_EACH_TEAM: [10] --> [10, 10]
+ [config] override MaxEpisodeStep: 100 --> 125
+ [config] override StepGameTime: 0.5 --> 0.5
+ [config] override StateProvided: False --> False
+ [config] override render: False --> True
+ [config] override UElink2editor: False --> False
+ [config] override HeteAgents: False --> True
+ [config] override UhmapVersion: 2.3 --> 3.5
+ [config] override UnrealLevel: UhmapBreakingBad --> UhmapLargeScale
+ [config] override SubTaskSelection: UhmapBreakingBad --> UhmapLargeScale
+ [config] override UhmapRenderExe:  --> /home/hmp/UnrealHmapBinary/Version3.5/LinuxNoEditor/UHMP.sh
+ [config] override UhmapServerExe: F:/UHMP/Build/WindowsServer/UHMPServer.exe --> /home/hmp/UnrealHmapBinary/Version3.5/LinuxServer/UHMPServer.sh
+ [config] override TimeDilation: 1.0 --> 64
+ [config] override TEAM_NAMES: ['ALGORITHM.None->None'] --> ['ALGORITHM.hete_league_onenet_fix.foundation->ReinforceAlgorithmFoundation', 'ALGORITHM.script_ai.uhmap_ls->DummyAlgorithmLinedAttack']
+ [config] warning, AGENT_ID_EACH_TEAM is chained by ['N_AGENT_EACH_TEAM'], automatic modifying: [range(0, 10)] --> [range(0, 10), range(10, 20)]
+ [config] warning, N_TEAM is chained by ['N_AGENT_EACH_TEAM'], automatic modifying: 1 --> 2
+ [config] warning, SubTaskConfig is chained by ['SubTaskSelection'], automatic modifying: <class 'MISSION.uhmap.SubTasks.UhmapBreakingBadConf.SubTaskConfig'> --> <class 'MISSION.uhmap.SubTasks.UhmapLargeScaleConf.SubTaskConfig'>
+ [config] warning, AutoPortOverride is chained by ['UElink2editor'], automatic modifying: True --> True
+ [config] warning, FrameRate is chained by ['TimeDilation'], automatic modifying: 25.6 --> 1638.4
+ [config] warning, obs_vec_length is chained by ['SubTaskSelection'], automatic modifying: 23 --> 23
+ [config] warning, obs_n_entity is chained by ['SubTaskSelection'], automatic modifying: 11 --> 11
+ ------------------------------------------------------------------------------
+     N_AGENT_EACH_TEAM     --> [10, 10]
+     AGENT_ID_EACH_TEAM    --> [range(0, 10), range(10, 20)]
+           N_TEAM          --> 2
+         TEAM_NAMES        --> ['ALGORITHM.hete_league_onenet_fix.foundation->ReinforceAlgorithmFoundation', 'ALGORITHM.script_ai.uhmap_ls->DummyAlgorithmLinedAttack']
+         ActAsUnity        --> False
+       RewardAsUnity       --> True
+         ObsAsUnity        --> False
+       MaxEpisodeStep      --> 125
+           render          --> True
+          TcpAddr          --> 127.0.0.1
+         UhmapPort         --> 21051
+        UnrealLevel        --> UhmapLargeScale
+      SubTaskSelection     --> UhmapLargeScale
+       SubTaskConfig       --> <class 'MISSION.uhmap.SubTasks.UhmapLargeScaleConf.SubTaskConfig'>
+       UElink2editor       --> False
+      AutoPortOverride     --> True
+        StepGameTime       --> 0.5
+       UhmapServerExe      --> /home/hmp/UnrealHmapBinary/Version3.5/LinuxServer/UHMPServer.sh
+       UhmapRenderExe      --> /home/hmp/UnrealHmapBinary/Version3.5/LinuxNoEditor/UHMP.sh
+        TimeDilation       --> 64.0
+         FrameRate         --> 1638.4
+       UhmapStartCmd       --> []
+       StateProvided       --> False
+      AvailActProvided     --> False
+       EntityOriented      --> True
+        ActionFormat       --> ASCII
+         n_actions         --> 25
+       obs_vec_length      --> 23
+        obs_n_entity       --> 11
+        UhmapVersion       --> 3.5
+         CanTurnOff        --> False
+         HeteAgents        --> True
+          DemoType         --> Default
+ ------------------------------------------------------------------------------
+
+
+
+ ------------- MISSION.uhmap.SubTasks.UhmapLargeScaleConf.py->SubTaskConfig -------------
+ [config] override agent_list: [{'team': 0, 'tid': 0, 'uid': 0, 'n_team_agent': 10, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 1, 'uid': 1, 'n_team_agent': 10, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 2, 'uid': 2, 'n_team_agent': 10, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 3, 'uid': 3, 'n_team_agent': 10, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 4, 'uid': 4, 'n_team_agent': 10, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 5, 'uid': 5, 'n_team_agent': 10, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 6, 'uid': 6, 'n_team_agent': 10, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 7, 'uid': 7, 'n_team_agent': 10, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 8, 'uid': 8, 'n_team_agent': 10, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 9, 'uid': 9, 'n_team_agent': 10, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 0, 'uid': 10, 'n_team_agent': 10, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 1, 'uid': 11, 'n_team_agent': 10, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 2, 'uid': 12, 'n_team_agent': 10, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 3, 'uid': 13, 'n_team_agent': 10, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 4, 'uid': 14, 'n_team_agent': 10, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 5, 'uid': 15, 'n_team_agent': 10, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 6, 'uid': 16, 'n_team_agent': 10, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 7, 'uid': 17, 'n_team_agent': 10, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 8, 'uid': 18, 'n_team_agent': 10, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 9, 'uid': 19, 'n_team_agent': 10, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}] --> [{'team': 0, 'tid': 0, 'type': 'RLA_UAV_Support', 'init_fn_name': 'init_air'}, {'team': 0, 'tid': 1, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 2, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 3, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 4, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 5, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 6, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 7, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 8, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 9, 'type': 'RLA_UAV_Support', 'init_fn_name': 'init_air'}, {'team': 1, 'tid': 0, 'type': 'RLA_UAV_Support', 'init_fn_name': 'init_air'}, {'team': 1, 'tid': 1, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 2, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 3, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 4, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 5, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 6, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 7, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 8, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 9, 'type': 'RLA_UAV_Support', 'init_fn_name': 'init_air'}]
+ ----------------------------------------------------------------------------------------
+         agent_list        --> [{'team': 0, 'tid': 0, 'type': 'RLA_UAV_Support', 'init_fn_name': 'init_air'}, {'team': 0, 'tid': 1, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 2, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 3, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 4, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 5, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 6, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 7, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 8, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 0, 'tid': 9, 'type': 'RLA_UAV_Support', 'init_fn_name': 'init_air'}, {'team': 1, 'tid': 0, 'type': 'RLA_UAV_Support', 'init_fn_name': 'init_air'}, {'team': 1, 'tid': 1, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 2, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 3, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 4, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 5, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 6, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 7, 'type': 'RLA_CAR', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 8, 'type': 'RLA_CAR_Laser', 'init_fn_name': 'init_ground'}, {'team': 1, 'tid': 9, 'type': 'RLA_UAV_Support', 'init_fn_name': 'init_air'}]
+       obs_vec_length      --> 23
+        obs_n_entity       --> 11
+        ActionFormat       --> Multi-Digit
+ ----------------------------------------------------------------------------------------
+
+
+
+ ------------- ALGORITHM.script_ai.uhmap_ls.py->DummyAlgConfig -------------
+ [config] override reserve:  -->  
+ ---------------------------------------------------------------------------
+          reserve          -->
+ ---------------------------------------------------------------------------
+
+
+
+ ------------- ALGORITHM.hete_league_onenet_fix.shell_env.py->ShellEnvConfig -------------
+ [config] override add_avail_act: False --> True 
+ -----------------------------------------------------------------------------------------
+       add_avail_act       --> True
+ -----------------------------------------------------------------------------------------
+
+
+
+ ------------- ALGORITHM.hete_league_onenet_fix.foundation.py->AlgorithmConfig -------------
+ [config] override train_traj_needed: 512 --> 128
+ [config] override hete_n_alive_frontend: 1 --> 3
+ [config] override hete_n_net_placeholder: 5 --> 5
+ [config] override hete_same_prob: 0.25 --> 0.2
+ [config] override load_checkpoint: False --> True
+ [config] override gamma: 0.99 --> 0.99
+ [config] override gamma_in_reward_forwarding: False --> True
+ [config] override gamma_in_reward_forwarding_value: 0.99 --> 0.95
+ [config] override prevent_batchsize_oom: False --> True
+ [config] override lr: 0.0001 --> 0.0001
+ [config] override ppo_epoch: 16 --> 24
+ [config] override hete_lasted_n: 100 --> 3
+ [config] override policy_resonance: False --> True
+ [config] override hete_exclude_zero_wr: False --> True
+ [config] override debug: False --> False
+ [config] override n_entity_placeholder: 11 --> 11
+ [config] override load_specific_checkpoint:  --> model_trained.pt
+ [config] override policy_matrix_testing: False --> True
+ [config] override allow_fast_test: True --> False
+ [config] override test_which_cpk: 1 --> 1
+ -------------------------------------------------------------------------------------------
+           gamma           --> 0.99
+            tau            --> 0.95
+     train_traj_needed     --> 128
+   hete_n_alive_frontend   --> 3
+     TakeRewardAsUnity     --> False
+     use_normalization     --> True
+      wait_norm_stable     --> True
+       add_prob_loss       --> False
+         n_focus_on        --> 2
+    n_entity_placeholder   --> 11
+      load_checkpoint      --> True
+  load_specific_checkpoint --> model_trained.pt
+         clip_param        --> 0.2
+         ppo_epoch         --> 24
+  n_pieces_batch_division  --> 1
+      value_loss_coef      --> 0.1
+        entropy_coef       --> 0.05
+       max_grad_norm       --> 0.5
+             lr            --> 0.0001
+   prevent_batchsize_oom   --> True
+ gamma_in_reward_forwarding --> True
+ gamma_in_reward_forwarding_value --> 0.95
+          net_hdim         --> 24
+         dual_conc         --> True
+          n_agent          --> auto load, do not change
+       ConfigOnTheFly      --> True
+   hete_n_net_placeholder  --> 5
+     hete_thread_align     --> False
+       hete_same_prob      --> 0.2
+       hete_lasted_n       --> 3
+      policy_resonance     --> True
+       use_avail_act       --> True
+           debug           --> False
+        ignore_test        --> False
+     type_agent_diff_lr    --> False
+    hete_exclude_zero_wr   --> True
+   policy_matrix_testing   --> True
+       test_which_cpk      --> 1
+     type_sel_override     --> False
+   type_sel_override_list  --> []
+      allow_fast_test      --> False
+ -------------------------------------------------------------------------------------------
+
+
+
+ ------------- ALGORITHM.hete_league_onenet_fix.stage_planner.py->PolicyRsnConfig -------------
+ [config] override resonance_start_at_update: 10 --> 1 
+ [config] override yita_min_prob: 0.15 --> 0.05
+ [config] override yita_max: 0.75 --> 0.5
+ [config] override yita_shift_method: -sin --> -cos
+ [config] override yita_shift_cycle: 1000 --> 1000
+ [config] override yita_inc_per_update: 0.0075 --> 0.01
+ ----------------------------------------------------------------------------------------------
+ resonance_start_at_update --> 1
+       yita_min_prob       --> 0.05
+          yita_max         --> 0.5
+    yita_inc_per_update    --> 0.01
+       freeze_critic       --> False
+     yita_shift_method     --> -cos
+      yita_shift_cycle     --> 1000
+ ----------------------------------------------------------------------------------------------
+
+
+
+ Current log path: ./ZHECKPOINT/uhmap_hete10vs10/ 
+ Warning! you will overwrite old logs if continue! 
+ Pause for 60 seconds before continue (or press Enter to confirm!) 
+>>
+ [config] Backup Folder: ALGORITHM/hete_league_onenet_fix 
+ [config] Backup Folder: MISSION/uhmap 
+[hmp_daemon.py] Disable periodic daemon to debug.
+ Linux multi-env using share memory 
+thread 0 initializing
+find port: 37941
+find port: 45327
+ Port 37941 will be used by hmp, port 45327 will be used by UE internally
+checking ScenarioConfig args problems ...
+ Traceback (most recent call last):
+  File "UTIL/shm_pool.pyx", line 195, in UTIL.shm_pool.SuperProc.run
+    self.add_targets(self._recv_squence())
+  File "UTIL/shm_pool.pyx", line 163, in UTIL.shm_pool.SuperProc.add_targets
+    self.automatic_generation(name, gen_fn, *arg)
+  File "UTIL/shm_pool.pyx", line 153, in UTIL.shm_pool.SuperProc.automatic_generation
+    setattr(self, name, gen_fn(*arg))
+  File "/home/hmp/hmp2g/UTIL/shm_env.py", line 26, in __init__
+    self.env = env_init_fn()
+  File "/home/hmp/hmp2g/MISSION/env_router.py", line 62, in <lambda>
+    return lambda: env_init_function(env_name, rank)
+  File "/home/hmp/hmp2g/MISSION/uhmap/uhmap_env_wrapper.py", line 19, in make_uhmap_env
+    return ST_CLASS(rank)
+  File "/home/hmp/hmp2g/MISSION/uhmap/SubTasks/UhmapLargeScale.py", line 18, in __init__
+    super().__init__(rank)
+  File "/home/hmp/hmp2g/MISSION/uhmap/uhmap_env_wrapper.py", line 171, in __init__
+    self.activate_simulation(self.id, find_port=True)
+  File "/home/hmp/hmp2g/MISSION/uhmap/uhmap_env_wrapper.py", line 223, in activate_simulation
+    if self.render: assert False, "You really want to render on Linux? If so, remove this line."        
+AssertionError: You really want to render on Linux? If so, remove this line.
+ 
+Traceback (most recent call last):
+  File "main.py", line 82, in <module>
+    runner = Runner(process_pool=smart_pool)
+  File "/home/hmp/hmp2g/task_runner.py", line 19, in __init__
+    self.envs = make_parallel_envs(process_pool)          # parallel environments start
+  File "/home/hmp/hmp2g/MISSION/env_router.py", line 113, in make_parallel_envs
+    envs = SuperpoolEnv(process_pool, env_args_dict_list)
+  File "/home/hmp/hmp2g/UTIL/shm_env.py", line 108, in __init__
+    self.SuperPool.add_target(name=self.env, lam=EnvWithRay, args_list=env_args_dict_list)
+  File "UTIL/shm_pool.pyx", line 304, in UTIL.shm_pool.SmartPool.add_target
+    for j in range(self.proc_num): self._wait_done(j)
+  File "UTIL/shm_pool.pyx", line 382, in UTIL.shm_pool.SmartPool._wait_done
+    if self.shared_memory_traffic_light[target_proc].value == TRAFFIC_LIGHT_ERROR: raise ChildExitException
+UTIL.shm_pool.ChildExitException
+ [shm_pool]: executing superpool del 
+ [shm_pool]: terminate in 2 
+ [shm_pool]: terminate in 1 
+ [shm_pool]: __del__ finish
